@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react';
-import { Animated, View } from 'react-native';
+import { KeyboardAvoidingView, Animated, View } from 'react-native';
 import styled from 'styled-components';
 
 import appStyles from '../../styles';
 import Header from './Header';
 import Form from './Form';
 
-const Wrapper = styled(View)`
+const Wrapper = styled(Animated.View)`
   width: ${({ theme }) => theme.metrics.getWidthFromDP('85%')}px;
   padding: ${({ theme }) => theme.metrics.mediumSize}px;
   border-radius: ${({ theme }) => theme.metrics.largeSize}px;
   background-color: ${({ theme }) => theme.colors.white};
+
 `;
 
 const SignUpCard = () => {
@@ -29,13 +30,18 @@ const SignUpCard = () => {
   }, []);
 
   return (
-    <Animated.View
+    <KeyboardAvoidingView
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+      behavior="padding"
+    >
+    <Wrapper
       style={[
         {
-          width: '100%',
-          height: '100%',
-          alignItems: 'center',
-          justifyContent: 'center',
+
           transform: [
             {
               translateY: initialPosition.y,
@@ -44,11 +50,10 @@ const SignUpCard = () => {
         },
       ]}
     >
-      <Wrapper>
         <Header />
         <Form />
-      </Wrapper>
-    </Animated.View>
+    </Wrapper>
+    </KeyboardAvoidingView>
   );
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput, Text, View } from 'react-native';
+import { TextInput, View } from 'react-native';
 
 import styled from 'styled-components';
 
@@ -33,12 +33,10 @@ const CustomInput = styled(TextInput).attrs(({ placeholder, type, theme }) => ({
   color: ${({ theme }) => theme.colors.text};
 `;
 
-type InputProps = {
+type Props = {
   onChangeText: (value: string) => void;
   withMarginBottom?: boolean;
   placeholder: string,
-  withLabel?: boolean;
-  label?: string;
   value: string;
   type: string,
 };
@@ -47,11 +45,9 @@ const Input = ({
   withMarginBottom,
   onChangeText,
   placeholder,
-  withLabel,
   value,
-  label,
   type
-}: InputProps) => (
+}: Props) => (
   <Wrapper
     withMarginBottom={withMarginBottom}
   >

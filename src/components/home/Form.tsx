@@ -6,7 +6,7 @@ import TextInput from '../TextInput';
 import Button from '../Button';
 
 const Wrapper = styled(View)`
-  margin-top: ${({ theme }) => theme.metrics.getWidthFromDP('8%')}px;
+  margin-top: ${({ theme }) => theme.metrics.getWidthFromDP('12%')}px;
 `;
 
 const Form = () => {

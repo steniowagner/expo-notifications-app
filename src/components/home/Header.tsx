@@ -1,35 +1,30 @@
 import React from 'react';
 import { View } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import styled from 'styled-components';
 
 import appStyles from '../../styles';
 
-const Wrapper = styled(View)`
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-`;
-
 const IconWrapper = styled(View)`
-  width: ${({ theme }) => theme.metrics.getWidthFromDP('15%')}px;
-  height: ${({ theme }) => theme.metrics.getWidthFromDP('15%')}px;
+  width: ${({ theme }) => theme.metrics.getWidthFromDP('18%')}px;
+  height: ${({ theme }) => theme.metrics.getWidthFromDP('18%')}px;
   align-items: center;
   justify-content: center;
-  border-radius: ${({ theme }) => theme.metrics.getWidthFromDP('7.5%')}px;
+  align-self: center;
+  position: absolute;
+  top: ${({ theme }) => -theme.metrics.getWidthFromDP('9%')}px;
+  border-radius: ${({ theme }) => theme.metrics.getWidthFromDP('9%')}px;
   background-color: ${({ theme }) => theme.colors.transparentAccent};
 `;
 
 const Header = () => (
-  <Wrapper>
-    <IconWrapper>
-    <MaterialIcons
-      size={appStyles.metrics.getWidthFromDP('7.5%')}
+  <IconWrapper>
+    <AntDesign
+      size={appStyles.metrics.getWidthFromDP('9%')}
       color={appStyles.colors.primaryColor}
-      name="notifications-none"
+      name="user"
     />
-    </IconWrapper>
-  </Wrapper>
+  </IconWrapper>
 );
 
 export default Header;
