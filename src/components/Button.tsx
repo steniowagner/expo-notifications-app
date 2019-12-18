@@ -6,9 +6,9 @@ import appStyles from '../styles';
 
 const Wrapper = styled(TouchableOpacity)`
   width: 100%;
+  height: ${({ theme }) => theme.metrics.getHeightFromDP('8%')}px;
   justify-content: center;
   align-items: center;
-  padding-vertical: ${({ theme }) => theme.metrics.largeSize}px;
   border-radius: ${({ theme }) => theme.metrics.extraSmallSize}px;
   background-color: ${({ isLoading, theme }) => (
     isLoading

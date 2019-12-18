@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { TextInput, View } from 'react-native';
 
 import styled from 'styled-components';
@@ -24,7 +24,7 @@ const CustomInput = styled(TextInput).attrs(({ placeholder, type, theme }) => ({
   underlineColorAndroid: 'transparent',
   selectionColor: theme.colors.transparentAccent,
   autoCapitalize: 'none',
-  textContentType: type,
+  keyboardType: type,
   autoCorrect: false,
   placeholder,
 }))`
@@ -41,7 +41,15 @@ type Props = {
   type: string,
 };
 
-const Input = ({
+const shouldComponentUpdate = (previousProps: Props, nextProps: Props) => {
+  if (previousProps.value !== nextProps.value) {
+    return false;
+  }
+
+  return true;
+};
+
+const Input = memo<Props>(({
   withMarginBottom,
   onChangeText,
   placeholder,
@@ -60,6 +68,6 @@ const Input = ({
       />
     </ContentContainer>
   </Wrapper>
-);
+), shouldComponentUpdate);
 
 export default Input;

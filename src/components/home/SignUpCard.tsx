@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { KeyboardAvoidingView, Animated, View } from 'react-native';
+import React, { useEffect, memo } from 'react';
+import { KeyboardAvoidingView, Animated } from 'react-native';
 import styled from 'styled-components';
 
 import appStyles from '../../styles';
@@ -8,13 +8,18 @@ import Form from './Form';
 
 const Wrapper = styled(Animated.View)`
   width: ${({ theme }) => theme.metrics.getWidthFromDP('85%')}px;
-  padding: ${({ theme }) => theme.metrics.mediumSize}px;
+  padding-horizontal: ${({ theme }) => theme.metrics.mediumSize}px;
+  padding-bottom: ${({ theme }) => theme.metrics.largeSize}px;
   border-radius: ${({ theme }) => theme.metrics.largeSize}px;
   background-color: ${({ theme }) => theme.colors.white};
-
 `;
 
-const SignUpCard = () => {
+type Props = {
+  onSubmitRegisterForm: (name: string, email: string) => void;
+  isLoading: boolean;
+};
+
+const SignUpCard = memo<Props>(({ onSubmitRegisterForm, isLoading }: Props) => {
   const initialPosition = new Animated.ValueXY({
     x: 0,
     y: appStyles.metrics.height,
@@ -41,7 +46,14 @@ const SignUpCard = () => {
     <Wrapper
       style={[
         {
-
+          shadowColor: "#000",
+          shadowOffset: {
+            width: 0,
+            height: 1,
+          },
+          shadowOpacity: 0.20,
+          shadowRadius: 1.41,
+          elevation: 2,
           transform: [
             {
               translateY: initialPosition.y,
@@ -51,10 +63,13 @@ const SignUpCard = () => {
       ]}
     >
         <Header />
-        <Form />
+        <Form
+          onSubmit={onSubmitRegisterForm}
+          isLoading={isLoading}
+        />
     </Wrapper>
     </KeyboardAvoidingView>
   );
-};
+});
 
 export default SignUpCard;

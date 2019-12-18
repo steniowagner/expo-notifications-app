@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { View } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import styled from 'styled-components';
@@ -17,7 +17,7 @@ const IconWrapper = styled(View)`
   background-color: ${({ theme }) => theme.colors.transparentAccent};
 `;
 
-const Header = () => (
+const Header = memo(() => (
   <IconWrapper>
     <AntDesign
       size={appStyles.metrics.getWidthFromDP('9%')}
@@ -25,6 +25,6 @@ const Header = () => (
       name="user"
     />
   </IconWrapper>
-);
+));
 
 export default Header;
