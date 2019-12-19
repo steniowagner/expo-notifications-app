@@ -14,10 +14,10 @@ const Wrapper = styled(Animated.View)`
   background-color: ${({ theme }) => theme.colors.white};
 `;
 
-type Props = {
+interface Props {
   onSubmitRegisterForm: (name: string, email: string) => void;
   isLoading: boolean;
-};
+}
 
 const SignUpCard = memo<Props>(({ onSubmitRegisterForm, isLoading }: Props) => {
   const initialPosition = new Animated.ValueXY({
@@ -43,31 +43,28 @@ const SignUpCard = memo<Props>(({ onSubmitRegisterForm, isLoading }: Props) => {
       }}
       behavior="padding"
     >
-    <Wrapper
-      style={[
-        {
-          shadowColor: "#000",
-          shadowOffset: {
-            width: 0,
-            height: 1,
-          },
-          shadowOpacity: 0.20,
-          shadowRadius: 1.41,
-          elevation: 2,
-          transform: [
-            {
-              translateY: initialPosition.y,
+      <Wrapper
+        style={[
+          {
+            shadowColor: '#000',
+            shadowOffset: {
+              width: 0,
+              height: 1,
             },
-          ],
-        },
-      ]}
-    >
+            shadowOpacity: 0.2,
+            shadowRadius: 1.41,
+            elevation: 2,
+            transform: [
+              {
+                translateY: initialPosition.y,
+              },
+            ],
+          },
+        ]}
+      >
         <Header />
-        <Form
-          onSubmit={onSubmitRegisterForm}
-          isLoading={isLoading}
-        />
-    </Wrapper>
+        <Form onSubmit={onSubmitRegisterForm} isLoading={isLoading} />
+      </Wrapper>
     </KeyboardAvoidingView>
   );
 });

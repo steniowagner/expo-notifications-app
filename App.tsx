@@ -6,9 +6,7 @@ import Home from './src/components/home/Home';
 import AppTheme from './src/styles';
 
 const App = () => (
-  <ThemeProvider
-    theme={AppTheme}
-  >
+  <ThemeProvider theme={AppTheme}>
     <Home />
   </ThemeProvider>
 );

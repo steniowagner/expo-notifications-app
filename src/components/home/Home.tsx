@@ -15,19 +15,15 @@ const Wrapper = styled(View)`
 `;
 
 const Home = () => {
-  const {
-    fetchData,
-    isLoading,
-    response,
-    error,
-  } = useFetch();
+  const { fetchData, isLoading, response, error } = useFetch()
 
   const { renderAlert } = useAlert();
 
   useEffect(() => {
     if (response) {
       renderAlert({
-        description: 'The user is now signed-up to receive notifications! You can send them now using the Dashboard! 🥳.',
+        description:
+          'The user is now signed-up to receive notifications! You can send them now using the Dashboard! 🥳.',
         title: 'Yay!',
       });
     }
@@ -51,7 +47,7 @@ const Home = () => {
 
     try {
       notificationToken = await AsyncStorage.getItem(CONSTANTS.VALUES.ASYNC_STORAGE_KEY);
-    } catch(err) {
+    } catch (err) {
       renderAlert({
         description: 'There was a problem when trying to get your notification token.',
         title: 'Oops...',
@@ -65,6 +61,12 @@ const Home = () => {
     const notificationToken = await getNotificationToken();
 
     if (!notificationToken) {
+      renderAlert({
+        description:
+          "You need to set a notification token. If you're running in a simulator, this action will not be possible.",
+        title: 'Notification token missed',
+      });
+
       return;
     }
 
@@ -81,12 +83,9 @@ const Home = () => {
 
   return (
     <Wrapper>
-      <SignUpCard
-        onSubmitRegisterForm={onSubmitRegisterForm}
-        isLoading={isLoading}
-      />
+      <SignUpCard onSubmitRegisterForm={onSubmitRegisterForm} isLoading={isLoading} />
     </Wrapper>
-  )
+  );
 };
 
 export default Home;

@@ -4,17 +4,18 @@ import styled from 'styled-components';
 
 import appStyles from '../styles';
 
-const Wrapper = styled(TouchableOpacity)`
+interface WrapperProps {
+  readonly isLoading: boolean;
+}
+
+const Wrapper = styled(TouchableOpacity)<WrapperProps>`
   width: 100%;
   height: ${({ theme }) => theme.metrics.getHeightFromDP('8%')}px;
   justify-content: center;
   align-items: center;
   border-radius: ${({ theme }) => theme.metrics.extraSmallSize}px;
-  background-color: ${({ isLoading, theme }) => (
-    isLoading
-      ? theme.colors.transparentAccent
-      : theme.colors.primaryColor
-  )};
+  background-color: ${({ isLoading, theme }) =>
+    isLoading ? theme.colors.transparentAccent : theme.colors.primaryColor};
 `;
 
 const ButtonText = styled(Text)`
@@ -25,23 +26,16 @@ const ButtonText = styled(Text)`
   text-transform: uppercase;
 `;
 
-type Props = {
+interface Props {
   onPress: () => void;
   isLoading?: boolean;
   label: string;
-};
+}
 
 const Button = ({ isLoading, onPress, label }: Props) => (
-  <Wrapper
-    disabled={isLoading === true}
-    isLoading={isLoading}
-    onPress={onPress}
-  >
+  <Wrapper disabled={isLoading === true} isLoading={isLoading} onPress={onPress}>
     {!isLoading && <ButtonText>{label}</ButtonText>}
-    {isLoading && <ActivityIndicator
-      color={appStyles.colors.primaryColor}
-      size="small"
-    />}
+    {isLoading && <ActivityIndicator color={appStyles.colors.primaryColor} size="small" />}
   </Wrapper>
 );
 

@@ -9,10 +9,10 @@ const Wrapper = styled(View)`
   margin-top: ${({ theme }) => theme.metrics.getWidthFromDP('12%')}px;
 `;
 
-type Props = {
+interface Props {
   onSubmit: (name: string, email: string) => void;
   isLoading: boolean;
-};
+}
 
 const Form = ({ isLoading, onSubmit }: Props) => {
   const [email, setEmail] = useState<string>('');
@@ -24,13 +24,7 @@ const Form = ({ isLoading, onSubmit }: Props) => {
 
   return (
     <Wrapper>
-      <TextInput
-        placeholder="Your name"
-        onChangeText={setName}
-        withMarginBottom
-        value={name}
-        type="default"
-      />
+      <TextInput placeholder="Your name" onChangeText={setName} withMarginBottom value={name} type="default" />
       <TextInput
         placeholder="Your e-mail"
         onChangeText={setEmail}
@@ -38,11 +32,7 @@ const Form = ({ isLoading, onSubmit }: Props) => {
         withMarginBottom
         value={email}
       />
-      <Button
-        onPress={onSubmitForm}
-        isLoading={isLoading}
-        label="sign-up"
-      />
+      <Button onPress={onSubmitForm} isLoading={isLoading} label="sign-up" />
     </Wrapper>
   );
 };

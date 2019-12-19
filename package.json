@@ -1,6 +1,7 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
+    "lint:fix": "prettier '**/*.{ts,tsx}' --write",
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
@@ -8,7 +9,10 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-prettier": "^3.1.2",
     "expo": "~36.0.0",
+    "prettier": "^1.19.1",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
@@ -20,7 +24,19 @@
     "@types/react": "~16.9.0",
     "@types/react-native": "~0.60.23",
     "@types/styled-components": "^4.4.1",
+    "@typescript-eslint/eslint-plugin": "^2.12.0",
+    "@typescript-eslint/parser": "^2.12.0",
     "babel-preset-expo": "~8.0.0",
+    "eslint": "^6.7.2",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "husky": "^3.1.0",
+    "lint-staged": "^9.5.0",
+    "prettier-eslint": "^9.0.1",
+    "prettier-eslint-cli": "^5.0.0",
     "typescript": "~3.6.3"
   },
   "private": true

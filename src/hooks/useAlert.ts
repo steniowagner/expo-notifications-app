@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 
-type Options = {
-  description: string,
-  title: string,
-};
+interface Options {
+  description: string;
+  title: string;
+}
 
 const useAlert = () => {
   const [options, setOptions] = useState<Options>(null);

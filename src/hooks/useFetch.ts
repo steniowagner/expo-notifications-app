@@ -1,19 +1,19 @@
 import { useState, useEffect } from 'react';
 
-type Options = {
+interface Options {
   method: string;
   body?: object;
   url: string;
-};
+}
 
-type FetchOptions = {
+interface FetchOptions {
   headers: {
-    'Content-Type': string,
-    'Accept': string,
-  },
-  method: string,
-  body: string,
-};
+    'Content-Type': string;
+    Accept: string;
+  };
+  method: string;
+  body: string;
+}
 
 const useFetch = (fireWhenMounted: boolean = false, defaultOptions: Options = null) => {
   const [options, setOptions] = useState<Options>(defaultOptions);
@@ -26,8 +26,8 @@ const useFetch = (fireWhenMounted: boolean = false, defaultOptions: Options = nu
 
     const fetchOptions = {
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
       method,

@@ -1,4 +1,4 @@
-import { AsyncStorage } from 'react-native';
+import { Platform, AsyncStorage } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import { Notifications } from 'expo';
 
@@ -15,9 +15,15 @@ const persistToken = async () => {
 };
 
 const notification = async () => {
-  const { status: existingStatus } = await Permissions.getAsync(
-    Permissions.NOTIFICATIONS
-  );
+  if (Platform.OS === 'android') {
+    await Notifications.createChannelAndroidAsync(CONSTANTS.VALUES.ANDROID_NOTIFICATIONS_CHANNEL, {
+      vibrate: [0, 250, 250, 250],
+      name: 'Notifications',
+      sound: true,
+    });
+  }
+
+  const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
 
   let finalStatus = existingStatus;
 

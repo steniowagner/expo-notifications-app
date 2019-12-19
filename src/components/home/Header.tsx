@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import { View } from 'react-native';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { AntDesign } from '@expo/vector-icons';
 import styled from 'styled-components';
 
@@ -19,11 +20,7 @@ const IconWrapper = styled(View)`
 
 const Header = memo(() => (
   <IconWrapper>
-    <AntDesign
-      size={appStyles.metrics.getWidthFromDP('9%')}
-      color={appStyles.colors.primaryColor}
-      name="user"
-    />
+    <AntDesign size={appStyles.metrics.getWidthFromDP('9%')} color={appStyles.colors.primaryColor} name="user" />
   </IconWrapper>
 ));
 
