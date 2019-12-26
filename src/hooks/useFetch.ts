@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 
 interface Options {
   method: string;
@@ -6,82 +6,96 @@ interface Options {
   url: string;
 }
 
-interface FetchOptions {
-  headers: {
-    'Content-Type': string;
-    Accept: string;
-  };
-  method: string;
-  body: string;
+interface State {
+  loading: boolean;
+  response: any;
+  error: any;
 }
 
-const useFetch = (fireWhenMounted: boolean = false, defaultOptions: Options = null) => {
+const headers = {
+  'Content-Type': 'application/json',
+  Accept: 'application/json',
+};
+
+const emptyFetchOptions = {
+  method: '',
+  url: '',
+  headers,
+};
+
+const INITIAL_STATE: State = {
+  loading: false,
+  response: null,
+  error: null,
+};
+
+const useFetch = (fireWhenMounted: boolean = false, defaultOptions: Options = emptyFetchOptions) => {
   const [options, setOptions] = useState<Options>(defaultOptions);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [response, setResponse] = useState<any>(null);
-  const [error, setError] = useState<Error>(null);
+  const [state, setState] = useState<State>(INITIAL_STATE);
 
-  const getFetchOptions = (): FetchOptions => {
-    const { method, body } = options;
-
+  const getFetchOptions = useCallback(() => {
     const fetchOptions = {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
-      method,
+      body: JSON.stringify(options?.body),
+      method: options.method,
+      headers,
     };
 
     return fetchOptions;
-  };
+  }, [options]);
 
-  const startFetch = async (): Promise<void | undefined> => {
+  const startFetch = useCallback(async (): Promise<void> => {
     const fetchOptions = getFetchOptions();
 
     const rawResponse = await fetch(options.url, fetchOptions);
-    const response = await rawResponse.json();
+    const fetchResponse = await rawResponse.json();
 
-    if (rawResponse.ok) {
-      return setResponse(response);
+    const stateUpdated = rawResponse.ok ? { response: fetchResponse } : { error: fetchResponse };
+
+    setState((preivousState: State) => ({
+      ...preivousState,
+      ...stateUpdated,
+      loading: false,
+    }));
+  }, [getFetchOptions, options.url]);
+
+  const fetchData = useCallback(async () => {
+    if (!options.url || !options.method) {
+      throw new Error('You must specify an URL and a HTTP method.');
     }
 
-    setError(response);
-  };
-
-  const fetchData = async () => {
-    if (!options) {
-      return;
-    }
-
-    setIsLoading(true);
+    setState(() => ({
+      ...INITIAL_STATE,
+      loading: true,
+    }));
 
     try {
       await startFetch();
-    } catch (error) {
-      setError(error);
+    } catch (fetchError) {
+      setState((preivousState: State) => ({
+        ...preivousState,
+        error: fetchError.message,
+        loading: false,
+      }));
     }
-
-    setIsLoading(false);
-  };
+  }, [startFetch, options]);
 
   useEffect(() => {
     if (fireWhenMounted) {
-      setError(null);
-
       fetchData();
     }
-  }, []);
+  }, [fireWhenMounted, fetchData]);
 
   useEffect(() => {
-    fetchData();
-  }, [options]);
+    if (!fireWhenMounted && options.url && options.method) {
+      fetchData();
+    }
+  }, [fireWhenMounted, fetchData, options]);
 
   return {
+    isLoading: state.loading,
+    response: state.response,
     fetchData: setOptions,
-    isLoading,
-    response,
-    error,
+    error: state.error,
   };
 };
 

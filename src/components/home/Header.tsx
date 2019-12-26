@@ -18,10 +18,10 @@ const IconWrapper = styled(View)`
   background-color: ${({ theme }) => theme.colors.transparentAccent};
 `;
 
-const Header = memo(() => (
+const Header = () => (
   <IconWrapper>
     <AntDesign size={appStyles.metrics.getWidthFromDP('9%')} color={appStyles.colors.primaryColor} name="user" />
   </IconWrapper>
-));
+);
 
-export default Header;
+export default memo(Header);

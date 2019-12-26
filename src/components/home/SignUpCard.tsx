@@ -19,7 +19,7 @@ interface Props {
   isLoading: boolean;
 }
 
-const SignUpCard = memo<Props>(({ onSubmitRegisterForm, isLoading }: Props) => {
+const SignUpCard = ({ onSubmitRegisterForm, isLoading }: Props) => {
   const initialPosition = new Animated.ValueXY({
     x: 0,
     y: appStyles.metrics.height,
@@ -67,6 +67,6 @@ const SignUpCard = memo<Props>(({ onSubmitRegisterForm, isLoading }: Props) => {
       </Wrapper>
     </KeyboardAvoidingView>
   );
-});
+};
 
-export default SignUpCard;
+export default memo(SignUpCard);

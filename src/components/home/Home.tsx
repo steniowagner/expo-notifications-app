@@ -6,6 +6,7 @@ import askPermissionNotification from '../../utils/permissions-handlers/notifica
 import CONSTANTS from '../../utils/constants';
 import useFetch from '../../hooks/useFetch';
 import useAlert from '../../hooks/useAlert';
+import SERVER_BASE_URL from '../../api';
 import SignUpCard from './SignUpCard';
 
 const Wrapper = styled(View)`
@@ -71,7 +72,7 @@ const Home = () => {
     }
 
     fetchData({
-      url: `${CONSTANTS.VALUES.API_URI}/users`,
+      url: `${SERVER_BASE_URL}/users`,
       method: 'POST',
       body: {
         notificationToken,

@@ -61,15 +61,12 @@ const shouldComponentUpdate = (previousProps: Props, nextProps: Props) => {
   return true;
 };
 
-const Input = memo<Props>(
-  ({ withMarginBottom, onChangeText, placeholder, value, type }: Props) => (
-    <Wrapper withMarginBottom={withMarginBottom}>
-      <ContentContainer>
-        <CustomInput onChangeText={text => onChangeText(text)} placeholder={placeholder} value={value} type={type} />
-      </ContentContainer>
-    </Wrapper>
-  ),
-  shouldComponentUpdate,
+const Input = ({ withMarginBottom, onChangeText, placeholder, value, type }: Props) => (
+  <Wrapper withMarginBottom={withMarginBottom}>
+    <ContentContainer>
+      <CustomInput onChangeText={text => onChangeText(text)} placeholder={placeholder} value={value} type={type} />
+    </ContentContainer>
+  </Wrapper>
 );
 
-export default Input;
+export default memo(Input, shouldComponentUpdate);
