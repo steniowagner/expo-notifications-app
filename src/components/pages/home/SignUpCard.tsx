@@ -2,7 +2,7 @@ import React, { useEffect, memo } from 'react';
 import { KeyboardAvoidingView, Animated } from 'react-native';
 import styled from 'styled-components';
 
-import appStyles from '../../styles';
+import appStyles from '../../../styles';
 import Header from './Header';
 import Form from './Form';
 

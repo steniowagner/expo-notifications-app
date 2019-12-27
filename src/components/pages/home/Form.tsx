@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import styled from 'styled-components';
 
-import TextInput from '../TextInput';
-import Button from '../Button';
+import TextInput from '../../TextInput';
+import Button from '../../Button';
 
 const Wrapper = styled(View)`
   margin-top: ${({ theme }) => theme.metrics.getWidthFromDP('12%')}px;
@@ -32,7 +32,7 @@ const Form = ({ isLoading, onSubmit }: Props) => {
         withMarginBottom
         value={email}
       />
-      <Button onPress={onSubmitForm} isLoading={isLoading} label="sign-up" />
+      <Button onPress={onSubmitForm} isLoading={isLoading} label="sign-up" disabled={!email || !name}/>
     </Wrapper>
   );
 };

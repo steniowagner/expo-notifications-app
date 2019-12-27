@@ -2,11 +2,11 @@ import React, { useCallback, useEffect } from 'react';
 import { AsyncStorage, View } from 'react-native';
 import styled from 'styled-components';
 
-import askPermissionNotification from '../../utils/permissions-handlers/notification';
-import CONSTANTS from '../../utils/constants';
-import useFetch from '../../hooks/useFetch';
-import useAlert from '../../hooks/useAlert';
-import SERVER_BASE_URL from '../../api';
+import askPermissionNotification from '../../../utils/permissions-handlers/notification';
+import CONSTANTS from '../../../utils/constants';
+import useFetch from '../../../hooks/useFetch';
+import useAlert from '../../../hooks/useAlert';
+import SERVER_BASE_URL from '../../../api';
 import SignUpCard from './SignUpCard';
 
 const Wrapper = styled(View)`
@@ -16,8 +16,7 @@ const Wrapper = styled(View)`
 `;
 
 const Home = () => {
-  const { fetchData, isLoading, response, error } = useFetch()
-
+  const { fetchData, isLoading, response, error } = useFetch();
   const { renderAlert } = useAlert();
 
   useEffect(() => {
@@ -33,7 +32,7 @@ const Home = () => {
   useEffect(() => {
     if (error) {
       renderAlert({
-        description: error.message,
+        description: error,
         title: 'Oops...',
       });
     }

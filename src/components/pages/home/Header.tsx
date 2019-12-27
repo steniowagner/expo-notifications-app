@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import styled from 'styled-components';
 
-import appStyles from '../../styles';
+import appStyles from '../../../styles';
 
 const IconWrapper = styled(View)`
   width: ${({ theme }) => theme.metrics.getWidthFromDP('18%')}px;
