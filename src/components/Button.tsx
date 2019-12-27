@@ -16,7 +16,7 @@ const Wrapper = styled(TouchableOpacity)<WrapperProps>`
   align-items: center;
   border-radius: ${({ theme }) => theme.metrics.extraSmallSize}px;
   background-color: ${({ isLoading, disabled, theme }) =>
-    (isLoading || disabled) ? theme.colors.transparentAccent : theme.colors.primaryColor};
+    isLoading || disabled ? theme.colors.transparentAccent : theme.colors.primaryColor};
 `;
 
 const ButtonText = styled(Text)`

@@ -32,7 +32,7 @@ const Form = ({ isLoading, onSubmit }: Props) => {
         withMarginBottom
         value={email}
       />
-      <Button onPress={onSubmitForm} isLoading={isLoading} label="sign-up" disabled={!email || !name}/>
+      <Button onPress={onSubmitForm} isLoading={isLoading} label="sign-up" disabled={!email || !name} />
     </Wrapper>
   );
 };
